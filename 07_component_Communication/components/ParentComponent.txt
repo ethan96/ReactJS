@@ -1,0 +1,69 @@
+class ParentComponent extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      count: 0,
+      date: '',
+      show:true,
+    }
+    this.onCallParent = this.onCallParent.bind(this);
+    this.switchClickHandler = this.switchClickHandler.bind(this);
+  }
+  
+  componentDidMount(){
+    this.intervalId = setInterval(() => {
+      this.setState({
+        count: this.state.count + 1
+      });
+      this.setState(function(state){
+        return {
+          count: state.count + 1
+        }
+      });
+      this.setState((state) => {
+        return {
+          count: state.count + 1
+        }
+      });
+      // 縮寫
+      this.setState((state) => 
+        ({count: state.count + 1}));
+    }, 1000);
+  }
+  componentWillUnmount(){
+    clearInterval(this.intervalId);
+  }
+  switchClickHandler(){
+    this.setState({
+      show: !this.state.show
+    });
+  }
+  onCallParent(date){
+    this.setState({
+      date: date,
+    })
+    console.log('onCallParent',date);
+  }
+  render () {
+    var {count,date,show} = this.state;
+    return (
+      <div className="parent-component">
+        <h1>ParentComponent</h1>
+        <p>state.count:{count}</p>
+        <p>state.date:{date}</p>
+
+        <button onClick={this.switchClickHandler}>switch Show</button>
+        {
+          show 
+          ? <ChildComponent 
+              count={count} 
+              onCallParent={this.onCallParent}/>
+          : null
+        }
+
+
+        
+      </div>
+    );
+  };
+}

@@ -1,0 +1,20 @@
+.box{
+  width: 100px;
+  height: 100px;
+}
+.box.box--1{
+  background-color:#1abc9c;
+}
+.box.box--2{
+  background-color:#e67e22;
+}
+.box.box--3{
+  background-color:#2c3e50;
+}
+section{
+  margin: 20px 0;
+}
+button{
+  width: 100px;
+  height: 50px;
+}
